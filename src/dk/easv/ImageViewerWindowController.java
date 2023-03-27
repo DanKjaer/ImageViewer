@@ -28,6 +28,7 @@ import javax.naming.Binding;
 public class ImageViewerWindowController implements Initializable
 {
     private final List<Image> images = new ArrayList<>();
+    public Label lblImageName;
     @FXML
     private Slider sldrDelay;
     @FXML

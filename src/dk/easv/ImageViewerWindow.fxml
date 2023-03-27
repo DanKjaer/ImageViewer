@@ -44,4 +44,7 @@
             </center>
         </BorderPane>
     </center>
+   <bottom>
+      <Label fx:id="lblImageName" prefHeight="17.0" prefWidth="331.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
