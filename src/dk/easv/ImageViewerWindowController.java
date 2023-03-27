@@ -9,11 +9,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -28,7 +30,10 @@ import javax.naming.Binding;
 public class ImageViewerWindowController implements Initializable
 {
     private final List<Image> images = new ArrayList<>();
-    public Label lblImageName;
+    @FXML
+    private Button btnStop;
+    @FXML
+    private Label lblImageName;
     @FXML
     private Slider sldrDelay;
     @FXML
@@ -37,12 +42,15 @@ public class ImageViewerWindowController implements Initializable
     private TextField tfDelay;
     private int currentImageIndex = 0;
     private int i = 0;
+    private boolean stopped;
 
     @FXML
     Parent root;
 
     @FXML
     private ImageView imageView;
+    private ExecutorService es = Executors.newFixedThreadPool(1);
+
 
 
     public ImageViewerWindowController() {
@@ -98,9 +106,9 @@ public class ImageViewerWindowController implements Initializable
         {
             currentImageIndex = (currentImageIndex + 1) % images.size();
             displayImage();
+            changeFilenameLabel(images.get(currentImageIndex));
         }
     }
-
     private void displayImage()
     {
         if (!images.isEmpty())
@@ -122,23 +130,42 @@ public class ImageViewerWindowController implements Initializable
             }
         }
     };
-    ExecutorService es = Executors.newFixedThreadPool(1);
 
 
-    private void imageLoop(){
-        System.out.println("running");
+    private void imageLoop() {
         es.submit(runnable);
-
     }
 
-    public void handleStop(ActionEvent actionEvent) {
-        System.out.println("stopped");
+    @FXML
+    private void handleStop(ActionEvent actionEvent) {
+        if (stopped) {
+            startShow();
+        } else {
+            stopShow();
+        }
+    }
+
+    private void startShow() {
+        imageLoop();
+        stopped = false;
+        btnStop.setText("STOP");
+    }
+
+    private void stopShow() {
         es.shutdownNow();
-        es.close();
+        es = Executors.newFixedThreadPool(1);
+        stopped = true;
+        btnStop.setText("START");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setUpBindings();
+    }
+
+    private void changeFilenameLabel(Image image) {
+        String imageURL = image.getUrl();
+        String imageName = imageURL.substring(imageURL.lastIndexOf("/") + 1);
+        Platform.runLater(() -> lblImageName.setText(imageName));
     }
 }

@@ -29,6 +29,7 @@
                   <Button fx:id="btnStop" mnemonicParsing="false" onAction="#handleStop" text="STOP" />
                   <Slider fx:id="sldrDelay" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" value="1.0" />
                   <Label fx:id="lblDelay" text="1" />
+                  <Label fx:id="lblImageName" prefHeight="17.0" prefWidth="331.0" />
                     </buttons>
                 </ButtonBar>
             </children>
@@ -44,7 +45,4 @@
             </center>
         </BorderPane>
     </center>
-   <bottom>
-      <Label fx:id="lblImageName" prefHeight="17.0" prefWidth="331.0" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>
