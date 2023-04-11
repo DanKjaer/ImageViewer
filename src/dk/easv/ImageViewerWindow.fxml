@@ -28,8 +28,12 @@
                         <Button id="btnNext" fx:id="btnNext" mnemonicParsing="false" onAction="#handleBtnNextAction" text="Next" />
                   <Button fx:id="btnStop" mnemonicParsing="false" onAction="#handleStop" text="STOP" />
                   <Slider fx:id="sldrDelay" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" value="1.0" />
-                  <Label fx:id="lblDelay" text="1" />
+                  <Label fx:id="lblDelay" minWidth="53.0" prefHeight="17.0" text="1" />
                   <Label fx:id="lblImageName" prefHeight="17.0" prefWidth="331.0" />
+                  <Label fx:id="lblBlå" />
+                  <Label fx:id="lblRed" layoutX="800.0" layoutY="30.0" />
+                  <Label fx:id="lblGreen" layoutX="910.0" layoutY="30.0" />
+                  <Label fx:id="lblMixed" layoutX="1020.0" layoutY="30.0" />
                     </buttons>
                 </ButtonBar>
             </children>
