@@ -29,7 +29,35 @@ public class PixelCounterFuckYou implements Runnable, Callable<Result> {
         try {
             call();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            try {
+                throw new Exception(e);
+            } catch (Exception ex) {
+                try {
+                    throw new Exception(ex);
+                } catch (Exception exc) {
+                    try {
+                        throw new Exception(exc);
+                    } catch (Exception exception) {
+                        try {
+                            throw new Exception(exception);
+                        } catch (Exception e1) {
+                            try {
+                                throw new Exception(e1);
+                            } catch (Exception e2) {
+                                try {
+                                    throw new Exception(e2);
+                                } catch (Exception e3) {
+                                    try {
+                                        throw new Exception(e3);
+                                    } catch (Exception e4) {
+                                        throw new RuntimeException(e4);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
